@@ -1,0 +1,13 @@
+apt-get install -y libgss3
+curl -sSL https://download.microsoft.com/download/2/E/5/2E58F097-805C-4AB8-9FC6-71288AB4409D/msodbcsql-13.0.0.0.tar.gz > msodbcsql.tar.gz
+curl -sSL https://download.microsoft.com/download/2/E/5/2E58F097-805C-4AB8-9FC6-71288AB4409D/msodbcsql-13.0.0.0.tar.gz.sha256 > msodbcsql.tar.gz.sha256
+cat msodbcsql.tar.gz | sha256sum --check msodbcsql.tar.gz.sha256
+msodbc_dir=${PWD}/$(tar -tzf msodbcsql.tar.gz | head -1)
+tar -xzvf msodbcsql.tar.gz
+cd $msodbc_dir
+dm_dir=$(./build_dm.sh --accept-warning --libdir=/usr/lib/x86_64-linux-gnu | grep 'cd /tmp' | sed 's/^.*cd //' | sed 's/; make.*$//')
+cd $dm_dir
+make install
+cd $msodbc_dir
+./install.sh install --accept-license
+
