@@ -19,5 +19,5 @@ RUN cd /tmp && \
   ./install.sh install --accept-license && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/*
-CMD ["/usr/bin/sqlcmd"]
+ENTRYPOINT ["/usr/bin/sqlcmd"]
 
