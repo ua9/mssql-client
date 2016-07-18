@@ -6,7 +6,6 @@ ADD ${MSODBC_URL}.sha256 /tmp/msodbcsql.tar.gz.sha256
 RUN cd /tmp && \
   apt-get -y update && \
   locale-gen "en_US.UTF-8" && \
-  dpkg-reconfigure locales && \
   apt-get install -y wget libgss3 libc6 libkrb5-3 && \
   cat msodbcsql.tar.gz | sha256sum --check msodbcsql.tar.gz.sha256 && \
   msodbc_dir=${PWD}/$(tar -tzf msodbcsql.tar.gz | head -1) && \
